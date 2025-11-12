@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zafir-website
+  namespace: zafir
+  labels:
+    app: zafir-website
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: zafir-website
+  template:
+    metadata:
+      labels:
+        app: zafir-website
+    spec:
+      containers:
+        - name: zafir-website
+          image: <IMAGE>
+          imagePullPolicy: Always
+          env:
+            - name: TZ
+              value: "Africa/Luanda"
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zafir-website-svc
+  namespace: zafir
+  labels:
+    app: zafir-website-svc
+spec:
+  selector:
+    app: zafir-website
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  type: ClusterIP

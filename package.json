@@ -1,0 +1,8 @@
+{
+  "name": "zafir-tecnologia",
+  "version": "1.0.0",
+  "description": "Zafir Tecnologia - Pure HTML Website",
+  "scripts": {
+    "build": "echo 'Build successful: Pure HTML project requires no build step' && exit 0"
+  }
+}

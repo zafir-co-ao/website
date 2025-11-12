@@ -1,0 +1,8 @@
+.git
+reference_repo
+.deployments
+README.md
+Dockerfile
+.dockerignore
+*.md
+*.yaml
