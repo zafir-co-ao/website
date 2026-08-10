@@ -4,7 +4,8 @@ ENV TZ=Africa/Luanda
 
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
-COPY index.html logo.svg /usr/share/nginx/html/
+COPY index.html logo.svg og-image.png /usr/share/nginx/html/
+COPY assets/mark.svg /usr/share/nginx/html/assets/mark.svg
 
 EXPOSE 80
 
